@@ -36,7 +36,8 @@
     "start": "node ./dist/cli/bin.js",
     "test": "ts-node-dev ./src/index.test.ts",
     "test:watch": "ts-node-dev --quiet --respawn ./src/index.test.ts",
-    "upgrade": "ncu -u"
+    "upgrade": "ncu -u",
+    "postinstall": "test -d node_modules/kysely/dist || (cd node_modules/kysely && pnpm run build)"
   },
   "dependencies": {
     "chalk": "4.1.2",
@@ -114,6 +115,7 @@
       "optional": true
     }
   },
+
   "eslintConfig": {
     "extends": [
       "@robinblomberg/robinblomberg",

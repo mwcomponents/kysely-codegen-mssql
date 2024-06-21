@@ -31,6 +31,7 @@ export type CliOptions = {
   typeOnlyImports?: boolean;
   url: string;
   verify?: boolean | undefined;
+  lowerCaseFields?: boolean | undefined
 };
 
 export type LogLevelName = (typeof LOG_LEVEL_NAMES)[number];
@@ -48,7 +49,7 @@ export class Cli {
     const runtimeEnums = options.runtimeEnums;
     const schema = options.schema;
     const typeOnlyImports = options.typeOnlyImports;
-
+    const lowerCase = options.lowerCaseFields;
     const logger = new Logger(options.logLevel);
 
     const connectionStringParser = new ConnectionStringParser();
@@ -82,6 +83,7 @@ export class Cli {
 
     await generator.generate({
       camelCase,
+      lowerCase,
       db,
       dialect,
       excludePattern,
@@ -155,6 +157,7 @@ export class Cli {
 
     const _: string[] = argv._;
     const camelCase = this.#parseBoolean(argv['camel-case']);
+    const lowerCase = this.#parseBoolean(argv['lower-case'])
     const dialectName = argv.dialect;
     const domains = this.#parseBoolean(argv.domains);
     const envFile = argv['env-file'] as string | undefined;
@@ -243,6 +246,7 @@ export class Cli {
       typeOnlyImports,
       url,
       verify,
+      lowerCaseFields: lowerCase
     };
   }
 

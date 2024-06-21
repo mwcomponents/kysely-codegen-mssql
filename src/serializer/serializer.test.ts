@@ -271,6 +271,7 @@ export const testSerializer = () => {
 
         const ast = transformer.transform({
           camelCase: true,
+          lowerCase: false,
           dialect,
           metadata: new DatabaseMetadata(
             [
@@ -329,6 +330,7 @@ export const testSerializer = () => {
 
         const ast = transformer.transform({
           camelCase: true,
+          lowerCase: false,
           dialect,
           metadata: new DatabaseMetadata(
             [

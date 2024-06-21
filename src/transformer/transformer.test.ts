@@ -33,15 +33,19 @@ export const testTransformer = () => {
     });
 
     const transform = (
+
       tables: TableMetadata[],
+
       camelCase: boolean,
       runtimeEnums: boolean,
+      lowerCase = false,
     ) => {
       const dialect = new PostgresDialect();
       const transformer = new Transformer();
       const metadata = new DatabaseMetadata(tables, enums);
       return transformer.transform({
         camelCase,
+        lowerCase,
         dialect,
         metadata,
         runtimeEnums,
@@ -79,6 +83,7 @@ export const testTransformer = () => {
         ],
         false,
         false,
+        false
       );
 
       deepStrictEqual(nodes, [
